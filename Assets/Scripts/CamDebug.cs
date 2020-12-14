@@ -5,7 +5,10 @@ using UnityEngine;
 public class CamDebug : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _cameras;
+    [SerializeField] private List<Transform> _playerPositions;
     private const float buttonWidth = 200;
+
+    public static Camera CurrentCamera;
 
     private const float buttonHeight = 50;
 
@@ -15,6 +18,8 @@ public class CamDebug : MonoBehaviour
         {
             c.SetActive(false);
         }
+        CurrentCamera = _cameras[0].GetComponent<Camera>();
+        Player.Instance.HeroMovement.SetupHeroPosition(_playerPositions[0].position);
         _cameras[0].SetActive(true);
     }
 
@@ -29,6 +34,8 @@ public class CamDebug : MonoBehaviour
                 {
                     c.SetActive(false);
                 }
+                CurrentCamera = _cameras[i].GetComponent<Camera>();
+                Player.Instance.HeroMovement.SetupHeroPosition(_playerPositions[i].position);
                 _cameras[i].SetActive(true);
 
             }
